@@ -6,7 +6,13 @@ export class ChattyServer {
            this.app = app;
        }
 
-       public start(): void {}
+       public start(): void {
+           this.securityMiddlewares(this.app);
+           this.securityMiddlewares(this.app);
+           this.securityMiddlewares(this.app);
+           this.securityMiddlewares(this.app);
+           this.securityMiddlewares(this.app);
+       }
 
           private securityMiddlewares(app:Application): void {}
 
@@ -19,6 +25,6 @@ export class ChattyServer {
           private startServer(app:Application): void {}
           private createSockerIO(httpServer: http.Server): void {}
 
-        private 
+          private startHttpServer(httpServer: http.Server): void {}
 
 }
