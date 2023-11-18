@@ -98,7 +98,10 @@ export class ChattyServer {
           private createSockerIO(httpServer: http.Server): void {}
 
           private startHttpServer(httpServer: http.Server): void {
-
+           //Will listen on port 5000
+            httpServer.listen(SERVER_PORT, () => {
+                console.log(`Server started on port ${SERVER_PORT}`);
+            })
 
           }
 
