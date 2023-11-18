@@ -99,6 +99,8 @@ export class ChattyServer {
            try{
                const httpServer: http.Server = new http.Server(app);
                this.startHttpServer(httpServer);
+           }catch (e) {
+               console.error(e);
            }
           }
           private createSockerIO(httpServer: http.Server): void {}
