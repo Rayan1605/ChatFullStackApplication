@@ -22,6 +22,8 @@ import cookierSession from "cookie-session";
 import compression from "compression";
 import HTTP_STATUS from "http-status-codes";
 import 'express-async-errors'
+
+const SERVER_PORT = 5000; // port for HTTP server
 export class ChattyServer {
     //The constructor takes in an Express Application object
    private app: Application;
@@ -84,7 +86,7 @@ export class ChattyServer {
              app.use(compression()); // compress all responses
              app.use(json({limit: '50mb'})); // parse json in request body
              app.use(urlencoded({limit: '50mb', extended: true})); // parse urlencoded in request body
-             
+
          }
 
 
@@ -95,6 +97,9 @@ export class ChattyServer {
           private startServer(app:Application): void {}
           private createSockerIO(httpServer: http.Server): void {}
 
-          private startHttpServer(httpServer: http.Server): void {}
+          private startHttpServer(httpServer: http.Server): void {
+
+
+          }
 
 }
