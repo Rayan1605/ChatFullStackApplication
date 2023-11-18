@@ -8,10 +8,10 @@ export class ChattyServer {
 
        public start(): void {
            this.securityMiddlewares(this.app);
-           this.securityMiddlewares(this.app);
-           this.securityMiddlewares(this.app);
-           this.securityMiddlewares(this.app);
-           this.securityMiddlewares(this.app);
+           this.standardMiddlewares(this.app);
+           this.routeMiddlewares(this.app);
+           this.globalErrorHandler(this.app);
+           this.startServer(this.app);
        }
 
           private securityMiddlewares(app:Application): void {}
