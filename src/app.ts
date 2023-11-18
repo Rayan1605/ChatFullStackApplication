@@ -5,7 +5,7 @@ import {ChattyServer} from "./setupServer";
 class Application {
 public initialize(): void {
     const app = express();
-    const server = new ChattyServer(app);
+    const server:ChattyServer = new ChattyServer(app);
     server.start();
 }
 
