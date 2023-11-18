@@ -15,6 +15,15 @@
 //Middleware are functions that run between receiving a request and sending a response
 import { Application, json, urlencoded, Response, Request, NextFunction}  from  'express';
 import * as http from "http";
+import cors from "cors";
+import helmet from "helmet";
+import hpp from "hpp";
+import cookierSession from "cookie-session";
+import compression from "compression";
+import HTTP_STATUS from "http-status-codes";
+import 'express-async-errors'
+
+const SERVER_PORT = 5000; // port for HTTP server
 export class ChattyServer {
     //The constructor takes in an Express Application object
    private app: Application;
@@ -46,17 +55,62 @@ export class ChattyServer {
 
     // startHttpServer starts listening on a port for HTTP requests.
 
-          private securityMiddlewares(app:Application): void {}
+    //             cors ->Allows requests to your app from other domains. Makes CORS errors go away.
+    //             helmet - Adds security headers to responses. Helps prevent attacks
+    //              hpp - Protects against HTTP parameter pollution. Stops bad query strings from breaking your app.
+    //             cookie-session - Stores session data in the cookie. Allows you to access session data
+    //            compression - Compresses responses to reduce size.
+    //
+          private securityMiddlewares(app:Application): void {
 
-         private standardMiddlewares(app:Application): void {}
+           app.use(
+               cookierSession({
+                     name: 'session', // load balance on aws will need this name
+                     keys: ["test1","test2"],
+                     maxAge: 24 * 7 * 3600000, // valid for 7 days
+                     secure: false, // set to true in production when using https
+               })
+           );
+           app.use(hpp()); // protect against http parameter pollution attacks
+              app.use(helmet()); // set security-related HTTP headers
+                app.use(
+                    cors({
+                        origin: "*",
+                        credentials: true, // allow cookies from client so MUST be true
+                        optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 200
+                        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // allow these verbs
+                    })); // enable cors
+          }
+
+         private standardMiddlewares(app:Application): void {
+             app.use(compression()); // compress all responses
+             app.use(json({limit: '50mb'})); // parse json in request body
+             app.use(urlencoded({limit: '50mb', extended: true})); // parse urlencoded in request body
+
+         }
+
 
          private routeMiddlewares(app:Application): void {}
 
     //Below will handle every error in the application weather in our features or controller
           private globalErrorHandler(app:Application): void {}
-          private startServer(app:Application): void {}
+          private  async startServer(app:Application): Promise<void>  {
+
+           try{
+               const httpServer: http.Server = new http.Server(app);
+               this.startHttpServer(httpServer);
+           }catch (e) {
+               console.error(e);
+           }
+          }
           private createSockerIO(httpServer: http.Server): void {}
 
-          private startHttpServer(httpServer: http.Server): void {}
+          private startHttpServer(httpServer: http.Server): void {
+           //Will listen on port 5000
+            httpServer.listen(SERVER_PORT, () => {
+                console.log(`Server started on port ${SERVER_PORT}`);
+            })
+
+          }
 
 }
