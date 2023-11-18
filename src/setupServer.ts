@@ -81,7 +81,10 @@ export class ChattyServer {
           }
 
          private standardMiddlewares(app:Application): void {
-
+             app.use(compression()); // compress all responses
+             app.use(json({limit: '50mb'})); // parse json in request body
+             app.use(urlencoded({limit: '50mb', extended: true})); // parse urlencoded in request body
+             
          }
 
 
