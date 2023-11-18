@@ -53,6 +53,12 @@ export class ChattyServer {
 
     // startHttpServer starts listening on a port for HTTP requests.
 
+    //             cors ->Allows requests to your app from other domains. Makes CORS errors go away.
+    //             helmet - Adds security headers to responses. Helps prevent attacks
+    //              hpp - Protects against HTTP parameter pollution. Stops bad query strings from breaking your app.
+    //             cookie-session - Stores session data in the cookie. Allows you to access session data
+    //            compression - Compresses responses to reduce size.
+    //
           private securityMiddlewares(app:Application): void {
 
            app.use(
@@ -69,18 +75,15 @@ export class ChattyServer {
                     cors({
                         origin: "*",
                         credentials: true, // allow cookies from client so MUST be true
-                        optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 200
+                        optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 200
                         methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // allow these verbs
                     })); // enable cors
           }
 
-         private standardMiddlewares(app:Application): void {}
-            //cors ->Allows requests to your app from other domains. Makes CORS errors go away.
-            // helmet - Adds security headers to responses. Helps prevent attacks
-            // hpp - Protects against HTTP parameter pollution. Stops bad query strings from breaking your app.
-            //cookie-session - Stores session data in the cookie. Allows you to access session data
-           // compression - Compresses responses to reduce size.
-    //compression - Compresses responses to reduce size. Makes responses faster
+         private standardMiddlewares(app:Application): void {
+
+         }
+
 
          private routeMiddlewares(app:Application): void {}
 
