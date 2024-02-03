@@ -15,11 +15,14 @@ class Config {
     public SECRET_KEY_TWO: string | undefined;
     public CLIENT_URL: string | undefined;
 
-  //JWT_TOKEN=thisisasecrettoken
-    // NODE_ENV=development
-    // SECRET_KEY_ONE=thisisasecretcookiekey
-    // SECRET_KEY_TWO=thisisanothersecretcookiekey
-    // CLIENT_URL=http://localhost:3000
+  private readonly DEFAULT_DATABASE_URL =   ' mongodb://localhost:27017/chattyApp-Backend'
+    constructor() {
+        this.DATABASE_URL = process.env.DATABASE_URL;
+        this.JWT_TOKEN = process.env.JWT_TOKEN;
+        this.SECRET_KEY_ONE = process.env.SECRET_KEY_ONE;
+        this.SECRET_KEY_TWO = process.env.SECRET_KEY_TWO;
+        this.CLIENT_URL = process.env.CLIENT_URL;
+    }
 
 };
 
