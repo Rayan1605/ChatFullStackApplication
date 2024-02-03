@@ -24,7 +24,7 @@ class Config {
         this.CLIENT_URL = process.env.CLIENT_URL || "";
     }
     // To make sure that all the configuration settings are defined
-    private validateConfig(): void {
+    public validateConfig(): void {
      for (const [key, value] of Object.entries(this)) // this is referring to the object that is being created
          //We are checking every object and if it is undefined then we throw an error
      {

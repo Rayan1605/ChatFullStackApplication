@@ -4,20 +4,24 @@ import databaseConnection from "./setupDatabase"
 import {config} from "./config";
 
 class Application {
-    public initialize(): void {
-        //The Express = express is the make sure that the app only holds an express application
-        const app: Express = express(); // create express app
-        databaseConnection();
-        const server:ChattyServer = new ChattyServer(app); // create server
-        server.start();// start server
-    }
+        public initialize(): void {
+            this.loadConfig();
+            databaseConnection();
+            //The Express = express is the make sure that the app only holds an express application
+            const app: Express = express(); // create express app
 
-    private loadConfig(): void {
-        // load configuration settings
+            const server:ChattyServer = new ChattyServer(app); // create server
+            server.start();// start server
+        }
 
-    }
+        private loadConfig(): void {
+            // load configuration settings
+               config.validateConfig()
+        }
+
 
 }
+
 
 const application:Application = new Application();
 application.initialize(); // initialize application
