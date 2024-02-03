@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-export default () => {
+export default () => { //
 
     const connect = () => {
         //Returning a promise so we will use then and catch
