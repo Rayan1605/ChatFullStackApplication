@@ -13,6 +13,14 @@
 // It starts an HTTP server and Socket.IO for realtime communication.
 
 //Middleware are functions that run between receiving a request and sending a response
+//Imagine you're at a playground, and you want to send a message to your friend on the other side of the playground. Middleware is like the series of talking tubes you might use to send your message through. You speak into one end of the tube, the message travels through the twists and turns, and then it comes out near your friend.
+//
+// In the world of computers, middleware is like those talking tubes, but for data and requests. When you use an app on your phone or computer, you're sending requests. Middleware is the software in the middle that takes your request, makes sure it gets to where it needs to go in the computer or network, maybe adds some information or translates it into a different "language" if needed, and then sends back the response to you.
+//
+// So, middleware helps different parts of a computer program or different programs to talk to each other smoothly, just like those talking tubes help you and your friend communicate across the playground.
+//
+// Answer Again
+// Search Web
 import { Application, json, urlencoded, Response, Request, NextFunction}  from  'express';
 import * as http from "http";
 import cors from "cors";
