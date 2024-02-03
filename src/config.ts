@@ -23,8 +23,14 @@ class Config {
         this.SECRET_KEY_TWO = process.env.SECRET_KEY_TWO || "";
         this.CLIENT_URL = process.env.CLIENT_URL || "";
     }
+    // To make sure that all the configuration settings are defined
     private validateConfig(): void {
-
+     for (const [key, value] of Object.entries(this)) // this is referring to the object that is being created
+     {
+         if (value === undefined) {
+             throw new Error(`Missing configuration for ${key}`);
+         }
+     }
     }
 
 };
