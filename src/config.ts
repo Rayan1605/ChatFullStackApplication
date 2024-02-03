@@ -23,6 +23,9 @@ class Config {
         this.SECRET_KEY_TWO = process.env.SECRET_KEY_TWO || "";
         this.CLIENT_URL = process.env.CLIENT_URL || "";
     }
+    private validateConfig(): void {
+
+    }
 
 };
 

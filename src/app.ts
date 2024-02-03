@@ -1,6 +1,7 @@
 import express, {Express} from "express";
 import {ChattyServer} from "./setupServer";
 import databaseConnection from "./setupDatabase"
+import {config} from "./config";
 
 class Application {
     public initialize(): void {
@@ -9,6 +10,11 @@ class Application {
         databaseConnection();
         const server:ChattyServer = new ChattyServer(app); // create server
         server.start();// start server
+    }
+
+    private loadConfig(): void {
+        // load configuration settings
+
     }
 
 }
