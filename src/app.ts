@@ -1,7 +1,6 @@
 import express, {Express} from "express";
-
 import {ChattyServer} from "./setupServer";
-
+import databaseConnection from "./setupDatabase"
 
 class Application {
     public initialize(): void {
