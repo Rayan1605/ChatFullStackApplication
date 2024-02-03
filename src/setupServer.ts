@@ -30,7 +30,7 @@ import cookierSession from "cookie-session";
 import compression from "compression";
 import HTTP_STATUS from "http-status-codes";
 import 'express-async-errors'
-
+import {config } from "./config";
 const SERVER_PORT = 5000; // port for HTTP server
 export class ChattyServer {
     //The constructor takes in an Express Application object
@@ -74,9 +74,9 @@ export class ChattyServer {
            app.use(
                cookierSession({
                      name: 'session', // load balance on aws will need this name
-                     keys: ["test1","test2"],
+                     keys: [config.SECRET_KEY_ONE!,config.SECRET_KEY_TWO!], //The ! is used to tell TypeScript that the value will not null or undefined
                      maxAge: 24 * 7 * 3600000, // valid for 7 days
-                     secure: false, // set to true in production when using https
+                     secure: config.NODE_ENV !== 'deployment', // set to true in production when using https
                })
            );
            app.use(hpp()); // protect against http parameter pollution attacks
