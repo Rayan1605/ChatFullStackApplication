@@ -19,4 +19,6 @@ export default () => {
     }
     connect();
 
+    mongoose.connection.on('disconnected', connect)
+
 };
