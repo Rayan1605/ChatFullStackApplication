@@ -26,6 +26,7 @@ class Config {
     // To make sure that all the configuration settings are defined
     private validateConfig(): void {
      for (const [key, value] of Object.entries(this)) // this is referring to the object that is being created
+         //We are checking every object and if it is undefined then we throw an error
      {
          if (value === undefined) {
              throw new Error(`Missing configuration for ${key}`);
