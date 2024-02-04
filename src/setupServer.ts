@@ -116,7 +116,7 @@ export class ChattyServer {
           private createSockerIO(httpServer: http.Server): void {
            const io: Server = new Server(httpServer, {
                cors: {
-                   origin: "*",
+                   origin:  config.CLIENT_URL,
                    methods: ["GET", "POST", "PUT","DELETE", "OPTIONS"],
                },
            });
