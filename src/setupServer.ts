@@ -120,7 +120,7 @@ export class ChattyServer {
                    methods: ["GET", "POST", "PUT","DELETE", "OPTIONS"],
                },
            });
-           const pubClient = createClient({url: });
+           const pubClient = createClient({url: config.REDIS_HOST});
        }
 
 
