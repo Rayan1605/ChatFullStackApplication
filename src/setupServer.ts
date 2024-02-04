@@ -28,7 +28,9 @@ import helmet from "helmet";
 import hpp from "hpp";
 import cookierSession from "cookie-session";
 import compression from "compression";
-import HTTP_STATUS from "http-status-codes";
+import  {Server} from "socket.io";
+import {createClient} from "redis";
+import {createAdapter} from "@socket.io/redis-adapter";
 import 'express-async-errors'
 import {config } from "./config";
 const SERVER_PORT = 5000; // port for HTTP server
@@ -111,7 +113,18 @@ export class ChattyServer {
                console.error(e);
            }
           }
-          private createSockerIO(httpServer: http.Server): void {}
+          private createSockerIO(httpServer: http.Server): void {
+           const io: Server = new Server(httpServer, {
+               cors: {
+                   origin: "*",
+                   methods: ["GET", "POST", "PUT","DELETE", "OPTIONS"],
+               },
+           });
+       }
+
+
+
+
 
           private startHttpServer(httpServer: http.Server): void {
            //Will listen on port 5000
