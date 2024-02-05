@@ -28,12 +28,14 @@ import helmet from "helmet";
 import hpp from "hpp";
 import cookierSession from "cookie-session";
 import compression from "compression";
+import ApplicationRoutes from "./routes";
 import  {Server} from "socket.io";
 import {createClient} from "redis";
 import {createAdapter} from "@socket.io/redis-adapter";
 import {config } from "./config";
 import * as process from "process";
 const SERVER_PORT = 5000; // port for HTTP server
+
 export class ChattyServer {
     //The constructor takes in an Express Application object
    private app: Application;
@@ -100,7 +102,9 @@ export class ChattyServer {
          }
 
 
-         private routeMiddlewares(app:Application): void {}
+         private routeMiddlewares(app:Application): void {
+                ApplicationRoutes(app);
+         }
 
     //Below will handle every error in the application weather in our features or controller
           private globalErrorHandler(app:Application): void {}
