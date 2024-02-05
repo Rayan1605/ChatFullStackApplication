@@ -33,6 +33,7 @@ import {createClient} from "redis";
 import {createAdapter} from "@socket.io/redis-adapter";
 import 'express-async-errors'
 import {config } from "./config";
+import * as process from "process";
 const SERVER_PORT = 5000; // port for HTTP server
 export class ChattyServer {
     //The constructor takes in an Express Application object
@@ -125,7 +126,6 @@ export class ChattyServer {
                   },
               });
               const pubClient = createClient({url: config.REDIS_HOST});
-
               const subClient = pubClient.duplicate();
               await Promise.all([pubClient.connect(), subClient.connect()]);
               io.adapter(createAdapter(pubClient, subClient));
@@ -138,6 +138,7 @@ export class ChattyServer {
 
 
           private startHttpServer(httpServer: http.Server): void {
+           console.log(`Server has started with process ${process.pid} on port ${SERVER_PORT}`);
            //Will listen on port 5000
             httpServer.listen(SERVER_PORT, () => {
                 console.log(`Server started on port ${SERVER_PORT}`);
