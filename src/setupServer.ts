@@ -28,9 +28,11 @@ import helmet from "helmet";
 import hpp from "hpp";
 import cookierSession from "cookie-session";
 import compression from "compression";
-import HTTP_STATUS from "http-status-codes";
-import 'express-async-errors'
+import  {Server} from "socket.io";
+import {createClient} from "redis";
+import {createAdapter} from "@socket.io/redis-adapter";
 import {config } from "./config";
+import * as process from "process";
 const SERVER_PORT = 5000; // port for HTTP server
 export class ChattyServer {
     //The constructor takes in an Express Application object
@@ -106,18 +108,45 @@ export class ChattyServer {
 
            try{
                const httpServer: http.Server = new http.Server(app);
+               const socketIO: Server = await this.createSocketIO(httpServer);
                this.startHttpServer(httpServer);
+               this.socketIOConnection(socketIO);
            }catch (e) {
                console.error(e);
            }
           }
-          private createSockerIO(httpServer: http.Server): void {}
+
+
+          private async createSocketIO(httpServer: http.Server): Promise<Server> {
+              const io: Server = new Server(httpServer, {
+                  cors: {
+                      origin: config.CLIENT_URL,
+                      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+                  },
+              });
+              const pubClient = createClient({url: config.REDIS_HOST});
+              const subClient = pubClient.duplicate();
+              await Promise.all([pubClient.connect(), subClient.connect()]);
+              io.adapter(createAdapter(pubClient, subClient));
+              return io;
+
+          }
+
+
+
+
 
           private startHttpServer(httpServer: http.Server): void {
+           console.log(`Server has started with process ${process.pid} on port ${SERVER_PORT}`);
            //Will listen on port 5000
             httpServer.listen(SERVER_PORT, () => {
                 console.log(`Server started on port ${SERVER_PORT}`);
             })
+
+          }
+
+          private socketIOConnection(io: Server): void {
+
 
           }
 
