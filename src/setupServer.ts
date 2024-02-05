@@ -113,7 +113,7 @@ export class ChattyServer {
                console.error(e);
            }
           }
-          private async createSockerIO(httpServer: http.Server): void {
+          private async createSockerIO(httpServer: http.Server): Promise<Server> {
               const io: Server = new Server(httpServer, {
                   cors: {
                       origin: config.CLIENT_URL,
