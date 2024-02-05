@@ -110,6 +110,7 @@ export class ChattyServer {
                const httpServer: http.Server = new http.Server(app);
                const socketIO: Server = await this.createSockerIO(httpServer);
                this.startHttpServer(httpServer);
+               this.socketIOConnection(socketIO);
            }catch (e) {
                console.error(e);
            }
