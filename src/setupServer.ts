@@ -18,9 +18,7 @@
 // In the world of computers, middleware is like those talking tubes, but for data and requests. When you use an app on your phone or computer, you're sending requests. Middleware is the software in the middle that takes your request, makes sure it gets to where it needs to go in the computer or network, maybe adds some information or translates it into a different "language" if needed, and then sends back the response to you.
 //
 // So, middleware helps different parts of a computer program or different programs to talk to each other smoothly, just like those talking tubes help you and your friend communicate across the playground.
-//
-// Answer Again
-// Search Web
+
 import { Application, json, urlencoded, Response, Request, NextFunction}  from  'express';
 import * as http from "http";
 import cors from "cors";
