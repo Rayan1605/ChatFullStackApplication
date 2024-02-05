@@ -31,7 +31,6 @@ import compression from "compression";
 import  {Server} from "socket.io";
 import {createClient} from "redis";
 import {createAdapter} from "@socket.io/redis-adapter";
-import 'express-async-errors'
 import {config } from "./config";
 import * as process from "process";
 const SERVER_PORT = 5000; // port for HTTP server
