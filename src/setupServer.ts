@@ -144,4 +144,9 @@ export class ChattyServer {
 
           }
 
+          private socketIOConnection(io: Server): void {
+
+
+          }
+
 }
