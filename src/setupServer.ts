@@ -121,6 +121,8 @@ export class ChattyServer {
                },
            });
            const pubClient = createClient({url: config.REDIS_HOST});
+
+
        }
 
 
