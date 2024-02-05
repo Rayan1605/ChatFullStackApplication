@@ -108,7 +108,7 @@ export class ChattyServer {
 
            try{
                const httpServer: http.Server = new http.Server(app);
-               const socketIO: Server = await this.createSockerIO(httpServer);
+               const socketIO: Server = await this.createSocketIO(httpServer);
                this.startHttpServer(httpServer);
                this.socketIOConnection(socketIO);
            }catch (e) {
@@ -117,7 +117,7 @@ export class ChattyServer {
           }
 
 
-          private async createSockerIO(httpServer: http.Server): Promise<Server> {
+          private async createSocketIO(httpServer: http.Server): Promise<Server> {
               const io: Server = new Server(httpServer, {
                   cors: {
                       origin: config.CLIENT_URL,
