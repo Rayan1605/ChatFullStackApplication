@@ -113,17 +113,21 @@ export class ChattyServer {
                console.error(e);
            }
           }
-          private createSockerIO(httpServer: http.Server): void {
-           const io: Server = new Server(httpServer, {
-               cors: {
-                   origin:  config.CLIENT_URL,
-                   methods: ["GET", "POST", "PUT","DELETE", "OPTIONS"],
-               },
-           });
-           const pubClient = createClient({url: config.REDIS_HOST});
+          private async createSockerIO(httpServer: http.Server): void {
+              const io: Server = new Server(httpServer, {
+                  cors: {
+                      origin: config.CLIENT_URL,
+                      methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+                  },
+              });
+              const pubClient = createClient({url: config.REDIS_HOST});
 
+              const subClient = pubClient.duplicate();
+              await Promise.all([pubClient.connect(), subClient.connect()]);
+              io.adapter(createAdapter(pubClient, subClient));
+              return io;
 
-       }
+          }
 
 
 
