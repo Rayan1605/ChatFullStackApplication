@@ -118,7 +118,9 @@ export class ChattyServer {
            }
           }
 
-
+// Lets the computer talk to each other in real time over the internet, When you need to share information back end forth
+    //quickly and efficiently, Socket.io keep a line open for instant updates so as soon as something happens you see
+    // it right away, it's useful for stream or chatting with a friend so it will update straight away
           private async createSocketIO(httpServer: http.Server): Promise<Server> {
               const io: Server = new Server(httpServer, {
                   cors: {
