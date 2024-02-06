@@ -128,6 +128,10 @@ export class ChattyServer {
                       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
                   },
               });
+              //We are using redis to store the data, remember that redis is a key value store and store the data
+              // in memory, which allow for fast access to the data weather we want to read or write
+
+              // Below is connecting to the redis server
               const pubClient = createClient({url: config.REDIS_HOST});
               const subClient = pubClient.duplicate();
               await Promise.all([pubClient.connect(), subClient.connect()]);
