@@ -133,6 +133,7 @@ export class ChattyServer {
 
               // Below is connecting to the redis server
               const pubClient = createClient({url: config.REDIS_HOST});
+              //
               const subClient = pubClient.duplicate();
               await Promise.all([pubClient.connect(), subClient.connect()]);
               io.adapter(createAdapter(pubClient, subClient));
