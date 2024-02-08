@@ -32,6 +32,8 @@ import {createClient} from "redis";
 import {createAdapter} from "@socket.io/redis-adapter";
 import {config } from "./config";
 import * as process from "process";
+import HTTP_STATUS from "http-status-codes";
+import {CustomError, IErrorResponse} from "./globels/error-handler";
 const SERVER_PORT = 5000; // port for HTTP server
 
 export class ChattyServer {
@@ -107,7 +109,16 @@ export class ChattyServer {
     //Below will handle every error in the application weather in our features or controller
           private globalErrorHandler(app:Application): void {
 
+            app.all('*', (req: Request, res: Response) => {
+                res.status(HTTP_STATUS.NOT_FOUND).json({ message: `Can't find ${req.originalUrl} on this server` });
+            });
 
+            app.use((error: IErrorResponse, _req: Request, res: Response, next: NextFunction) => {
+                console.error(error);
+                if (error instanceof CustomError) {
+                    return res.status(err.statusCode).json(err.serializeErrors());
+                }
+            });
 
 
           }
