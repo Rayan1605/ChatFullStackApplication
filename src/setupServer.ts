@@ -105,7 +105,12 @@ export class ChattyServer {
          }
 
     //Below will handle every error in the application weather in our features or controller
-          private globalErrorHandler(app:Application): void {}
+          private globalErrorHandler(app:Application): void {
+
+
+
+
+          }
           private  async startServer(app:Application): Promise<void>  {
 
            try{
