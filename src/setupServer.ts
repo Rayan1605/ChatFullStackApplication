@@ -136,7 +136,7 @@ export class ChattyServer {
                this.startHttpServer(httpServer);
                this.socketIOConnection(socketIO);
            }catch (e) {
-               console.error(e);
+               log.error(e);
            }
           }
 
