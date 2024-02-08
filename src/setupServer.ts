@@ -35,7 +35,6 @@ import {config } from "./config";
 import * as process from "process";
 import HTTP_STATUS from "http-status-codes";
 import {CustomError, IErrorResponse} from "./globels/error-handler";
-import {Expression} from "mongoose";
 
 
 const SERVER_PORT = 5000; // port for HTTP server
@@ -177,7 +176,7 @@ export class ChattyServer {
           }
 
           private socketIOConnection(io: Server): void {
-
+            log.info('Socket.IO is ready for connections');
 
           }
 
