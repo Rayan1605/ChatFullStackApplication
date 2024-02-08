@@ -27,14 +27,17 @@ import hpp from "hpp";
 import cookierSession from "cookie-session";
 import Logger  from "bunyan";
 import compression from "compression";
-import ApplicationRoutes from "./routes";
+
 import  {Server} from "socket.io";
-import {createClient} from "redis";
-import {createAdapter} from "@socket.io/redis-adapter";
-import {config } from "./config";
 import * as process from "process";
 import HTTP_STATUS from "http-status-codes";
-import {CustomError, IErrorResponse} from "./globels/error-handler";
+import {createClient} from "redis";
+import ApplicationRoutes from "@root/routes";
+import {createAdapter} from "@socket.io/redis-adapter";
+import {config} from "@root/config";
+import {CustomError, IErrorResponse} from "@root/globels/error-handler";
+
+
 
 
 const SERVER_PORT = 5000; // port for HTTP server
@@ -107,7 +110,7 @@ export class ChattyServer {
 
 
          private routeMiddlewares(app:Application): void {
-                ApplicationRoutes(app);
+             ApplicationRoutes(app);
          }
 
     //Below will handle every error in the application weather in our features or controller
