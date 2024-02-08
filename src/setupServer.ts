@@ -25,6 +25,7 @@ import cors from "cors";
 import helmet from "helmet";
 import hpp from "hpp";
 import cookierSession from "cookie-session";
+import Logger  from "bunyan";
 import compression from "compression";
 import ApplicationRoutes from "./routes";
 import  {Server} from "socket.io";
@@ -34,7 +35,11 @@ import {config } from "./config";
 import * as process from "process";
 import HTTP_STATUS from "http-status-codes";
 import {CustomError, IErrorResponse} from "./globels/error-handler";
+import {Expression} from "mongoose";
+
+
 const SERVER_PORT = 5000; // port for HTTP server
+const log: Logger = config.createLogger('server');
 
 export class ChattyServer {
     //The constructor takes in an Express Application object
