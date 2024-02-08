@@ -18,23 +18,30 @@
 // In the world of computers, middleware is like those talking tubes, but for data and requests. When you use an app on your phone or computer, you're sending requests. Middleware is the software in the middle that takes your request, makes sure it gets to where it needs to go in the computer or network, maybe adds some information or translates it into a different "language" if needed, and then sends back the response to you.
 //
 // So, middleware helps different parts of a computer program or different programs to talk to each other smoothly, just like those talking tubes help you and your friend communicate across the playground.
-//
-// Answer Again
-// Search Web
+
 import { Application, json, urlencoded, Response, Request, NextFunction}  from  'express';
 import * as http from "http";
 import cors from "cors";
 import helmet from "helmet";
 import hpp from "hpp";
 import cookierSession from "cookie-session";
+import Logger  from "bunyan";
 import compression from "compression";
-import ApplicationRoutes from "./routes";
+
 import  {Server} from "socket.io";
-import {createClient} from "redis";
-import {createAdapter} from "@socket.io/redis-adapter";
-import {config } from "./config";
 import * as process from "process";
+import HTTP_STATUS from "http-status-codes";
+import {createClient} from "redis";
+import ApplicationRoutes from "@root/routes";
+import {createAdapter} from "@socket.io/redis-adapter";
+import {config} from "@root/config";
+import {CustomError, IErrorResponse} from "@root/globels/error-handler";
+
+
+
+
 const SERVER_PORT = 5000; // port for HTTP server
+const log: Logger = config.createLogger('server');
 
 export class ChattyServer {
     //The constructor takes in an Express Application object
@@ -103,11 +110,26 @@ export class ChattyServer {
 
 
          private routeMiddlewares(app:Application): void {
-                ApplicationRoutes(app);
+             ApplicationRoutes(app);
          }
 
     //Below will handle every error in the application weather in our features or controller
-          private globalErrorHandler(app:Application): void {}
+          private globalErrorHandler(app:Application): void {
+
+            app.all('*', (req: Request, res: Response) => {
+                res.status(HTTP_STATUS.NOT_FOUND).json({ message: `Can't find ${req.originalUrl} on this server` });
+            });
+
+            app.use((error: IErrorResponse, _req: Request, res: Response, next: NextFunction) => {
+                log.error(error);
+                if (error instanceof CustomError) {
+                    return res.status(error.statusCode).json(error.serializeErrors());
+                }
+                next()
+            });
+
+
+          }
           private  async startServer(app:Application): Promise<void>  {
 
            try{
@@ -116,11 +138,13 @@ export class ChattyServer {
                this.startHttpServer(httpServer);
                this.socketIOConnection(socketIO);
            }catch (e) {
-               console.error(e);
+               log.error(e);
            }
           }
 
-
+// Lets the computer talk to each other in real time over the internet, When you need to share information back end forth
+    //quickly and efficiently, Socket.io keep a line open for instant updates so as soon as something happens you see
+    // it right away, it's useful for stream or chatting with a friend so it will update straight away
           private async createSocketIO(httpServer: http.Server): Promise<Server> {
               const io: Server = new Server(httpServer, {
                   cors: {
@@ -128,7 +152,12 @@ export class ChattyServer {
                       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
                   },
               });
+              //We are using redis to store the data, remember that redis is a key value store and store the data
+              // in memory, which allow for fast access to the data weather we want to read or write
+
+              // Below is connecting to the redis server
               const pubClient = createClient({url: config.REDIS_HOST});
+              //
               const subClient = pubClient.duplicate();
               await Promise.all([pubClient.connect(), subClient.connect()]);
               io.adapter(createAdapter(pubClient, subClient));
@@ -141,16 +170,16 @@ export class ChattyServer {
 
 
           private startHttpServer(httpServer: http.Server): void {
-           console.log(`Server has started with process ${process.pid} on port ${SERVER_PORT}`);
+           log.info(`Server has started with process ${process.pid} on port ${SERVER_PORT}`);
            //Will listen on port 5000
             httpServer.listen(SERVER_PORT, () => {
-                console.log(`Server started on port ${SERVER_PORT}`);
+                log.info(`Server started on port ${SERVER_PORT}`);
             })
 
           }
 
           private socketIOConnection(io: Server): void {
-
+            log.info('Socket.IO is ready for connections');
 
           }
 

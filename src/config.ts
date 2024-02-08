@@ -4,6 +4,7 @@
 
 //The dotenv package is used to read the .env file and make those values available to the application
 import dotenv from "dotenv";
+import bunyan from "bunyan";
 
 dotenv.config({}); // read .env file
 
@@ -28,6 +29,11 @@ class Config {
         this.REDIS_HOST = process.env.REDIS_HOST || "";
 
     }
+
+    public createLogger(name: string): bunyan {
+        return bunyan.createLogger({name, level: 'debug' });
+    }
+
     // To make sure that all the configuration settings are defined
     public validateConfig(): void {
       console.log(this)
