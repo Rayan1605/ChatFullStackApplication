@@ -5,7 +5,6 @@ interface IERROR {
     message: string;
     statusCode: number;
     status: string;
-    serializeErrors(): IERROR;
 }
 
 export  interface IErrorHandler {
