@@ -25,3 +25,9 @@ class Application {
 
 const application:Application = new Application();
 application.initialize(); // initialize application
+
+
+// Setting up the cloud area because we are going to be adding or uploading files to the cloud
+// cloud ordinary is just a cloud platform that is used to store files and manipulate them
+
+

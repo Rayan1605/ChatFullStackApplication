@@ -11,7 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "@socket.io/redis-adapter": "^8.2.1",
+    "bullmq": "^5.1.10",
     "bunyan": "^1.8.15",
+    "cloudinary": "^2.0.1",
     "compression": "^1.7.4",
     "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
