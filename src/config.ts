@@ -5,6 +5,7 @@
 //The dotenv package is used to read the .env file and make those values available to the application
 import dotenv from "dotenv";
 import bunyan from "bunyan";
+import cloudinary from "cloudinary";
 
 dotenv.config({}); // read .env file
 
@@ -51,7 +52,16 @@ class Config {
              throw new Error(`Missing configuration for ${key}`);
          }
      }
-    }
+  }
+
+  public cloudinaryConfig(): void {
+      cloudinary.v2.config({
+          cloud_name: this.CLOUD_NAME,
+            api_key: this.CLOUD_API_KEY,
+            api_secret: this.CLOUD_API_SECRET
+
+      })
+  }
 
 };
 
