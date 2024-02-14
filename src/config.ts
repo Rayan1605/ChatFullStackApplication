@@ -53,7 +53,7 @@ class Config {
          }
      }
   }
-
+//The cloudinary.v2.config({}) function is part of the Cloudinary library for Node.js, and it's used to configure the Cloudinary SDK with your account details
   public cloudinaryConfig(): void {
       cloudinary.v2.config({
           cloud_name: this.CLOUD_NAME,
@@ -63,7 +63,7 @@ class Config {
       })
   }
 
-};
+}
 
 export const config: Config = new Config(); // create config object
 
