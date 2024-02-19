@@ -28,7 +28,7 @@ import { ObjectId} from "mongodb";
      avatarColor: string;
      createdAt: Date;
      comparePassword(password: string): Promise<boolean>;
-
+     hashPassword(password: string): Promise<string>;
 
 
 
