@@ -4,7 +4,8 @@ import { ObjectId} from "mongodb";
  declare global {
      namespace Express {
          interface Request {
-             currentUser?: AuthPayload;
+             currentUser?: AuthPayload; //This will be in error if no user logged in so I made it optional so no
+             // error will be thrown
          }
      }
  }
