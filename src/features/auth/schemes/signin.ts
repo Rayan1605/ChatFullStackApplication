@@ -1,5 +1,5 @@
 import Joi, { ObjectSchema } from 'joi';
-
+//The loginSchema ensures both fields are strings, required, and their lengths are restricted to a minimum of 4 and a maximum of 8
 const loginSchema: ObjectSchema = Joi.object().keys({
   username: Joi.string().required().min(4).max(8).messages({
     'string.base': 'Username must be of type string',
