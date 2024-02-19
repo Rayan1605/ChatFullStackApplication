@@ -15,5 +15,4 @@ const loginSchema: ObjectSchema = Joi.object().keys({
         'string.empty': 'Password is a required field'
     })
 })
-
 export { loginSchema};
