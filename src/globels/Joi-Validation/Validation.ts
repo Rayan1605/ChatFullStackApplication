@@ -2,4 +2,6 @@ import {JoiRequestValidationError} from "@root/globels/error-handler";
 import { Request} from "express";
 import { ObjectSchema} from "joi"
 
-type
+type IJoiDecorator = (target: any, key: string, descriptor: PropertyDescriptor) => void;
+
+
