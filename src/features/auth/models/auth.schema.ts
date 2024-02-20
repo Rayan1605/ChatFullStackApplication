@@ -28,3 +28,15 @@ authSchema.pre("save", async function (this: IAuthDocument, next: () => void) {
     this.password = hashedPassword;
     next();
 })
+
+authSchema.methods.comparePassword = async function ( password: string): Promise<boolean> {
+    const hashedPassword: string = (this as unknown as IAuthDocument).password!;
+    return compare(password, hashedPassword);
+}
+
+authSchema.methods.hashPassword = async function (password: string): Promise<string> {
+    return hash(password, SALT_ROUND);
+}
+
+const AuthModel: Model<IAuthDocument> = model<IAuthDocument>("Auth", authSchema, "auth");
+ export { AuthModel }
