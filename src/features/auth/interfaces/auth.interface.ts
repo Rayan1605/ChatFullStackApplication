@@ -35,7 +35,7 @@ import { ObjectId} from "mongodb";
      uId: string;
      username: string;
      email: string;
-     password?: string;
+     password?: string; // This is optional because we don't want to return the password
      avatarColor: string;
      createdAt: Date;
      comparePassword(password: string): Promise<boolean>;
