@@ -6,7 +6,8 @@ import { ObjectId} from "mongodb";
      namespace Express {
          // interface Request  is used to add a new property to the Request object
          // changes the Express framework (used for making web applications) to include a new piece of
-         // user information in each request. This means whenever a request is made (like loading a page), it can include data about the logged-in user, but only if someone is logged in.
+         // user information in each request. This means whenever a request is made (like loading a page),
+         // it can include data about the logged-in user, but only if someone is logged in.
 
          interface Request {
              currentUser?: AuthPayload; //This will be in error if no user logged in so I made it optional so no
