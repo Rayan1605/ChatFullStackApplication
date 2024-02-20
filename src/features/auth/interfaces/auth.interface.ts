@@ -16,6 +16,8 @@ import { ObjectId} from "mongodb";
      }
  }
 
+ //This is a set of rules for what information about the user needs to be available
+// (like their email and username).
  export interface AuthPayload {
 
    userId: string;
@@ -26,6 +28,8 @@ import { ObjectId} from "mongodb";
      iat: number;
  }
 
+ //This is more rules, but for user information stored in the database,
+// including functions for checking passwords and making passwords safe to store
  export interface IAuthDocument extends Document {
      _id: string | ObjectId;
      uId: string;
