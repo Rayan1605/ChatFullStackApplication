@@ -40,7 +40,17 @@ import { ObjectId} from "mongodb";
      createdAt: Date;
      comparePassword(password: string): Promise<boolean>;
      hashPassword(password: string): Promise<string>;
-
-
-
  }
+
+ export interface ISignUpData {
+     _id: ObjectId;
+     uId: string;
+     email: string;
+     username: string;
+     password: string;
+     avatarColor: string;
+ }
+
+    export interface ILoginData {
+     value?: string | IAuthDocument;
+    }
