@@ -41,6 +41,7 @@ import { ObjectId} from "mongodb";
      comparePassword(password: string): Promise<boolean>;
      hashPassword(password: string): Promise<string>;
  }
+ // This is  the data required from users when they register below.
 
  export interface ISignUpData {
      _id: ObjectId;
