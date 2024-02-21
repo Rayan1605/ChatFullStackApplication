@@ -22,6 +22,16 @@ export class Signup {
          const authObjectId: ObjectId = new ObjectId();
          const userObjectId: ObjectId = new ObjectId();
          const uid = `${Helpers.generateRandomColor(12)}`
+         const authData: IAuthDocument = Signup.prototype.signupData({
+
+                _id: authObjectId,
+                uId: uid,
+                username,
+                email,
+                password,
+                avatarColor
+         });
+
 
     }
 
