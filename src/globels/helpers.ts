@@ -8,4 +8,9 @@ export class Helpers {
         return Vstring.split(' ').map((value: string) => `${value.charAt(0).
      toUpperCase()}${value.slice(1).toLowerCase()}`).join(' ')
     }
+
+    static lowerEmail = (email: string): string => {
+
+        return email.toLowerCase();
+}
 }

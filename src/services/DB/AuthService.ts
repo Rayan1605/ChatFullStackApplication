@@ -1,4 +1,5 @@
 import {IAuthDocument} from "@root/features/auth/interfaces/auth.interface";
+import {Helpers} from "@root/globels/helpers";
 
 class AuthService {
 
@@ -8,8 +9,8 @@ class AuthService {
     public async getUserByUsernameOrEmail(username: string, email: string): Promise<IAuthDocument> {
     const query = {
         $or: [
-            {username},
-            {email}
+            {username: Helpers.firstletter(username)},
+            {email: Helpers.lowerEmail(email)}
         ]
     }
 
