@@ -21,7 +21,7 @@ static generateRandomColor = (integerLength: number): number => {
         for (let i = 0; i < integerLength; i++){
             result += character.charAt(Math.floor(Math.random() * charactersLength));
         }
-        return parseInt(result);
+        return parseInt(result, 10);
 
 
 }
