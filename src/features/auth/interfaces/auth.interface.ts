@@ -52,6 +52,8 @@ import { ObjectId} from "mongodb";
      avatarColor: string;
  }
 
+ // This is the data required from users when they log in below which is simply the IAuthDocument or a string
+
     export interface ILoginData {
      value?: string | IAuthDocument;
     }
