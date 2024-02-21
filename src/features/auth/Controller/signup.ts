@@ -8,7 +8,7 @@ export class Signup {
     // it's processed by your application or stored in your database
     @joiValidation(signupSchema)
     public async signup(req: Request, res: Response): Promise<void> {
-        const {email, username, password, avatarColor} = req.body;
+     const { username, email, password, avatarColor, avatarImage} = req.body;
 
     }
 }
