@@ -35,6 +35,10 @@ export class Signup {
          });
     const result: UploadApiResponse = await uploads(avatarImage, `${userObjectId}`,true,true) as UploadApiResponse;
 
+     if (!result?.public_id) {
+         throw new BadRequestError("Error occurred: File upload failed. Try again");
+     }
+
     }
 
     private signupData(data: ISignUpData): IAuthDocument {
