@@ -6,6 +6,8 @@ import {IAuthDocument, ISignUpData} from "@root/features/auth/interfaces/auth.in
 import {authService} from "@services/DB/AuthService";
 import {BadRequestError} from "@root/globels/error-handler";
 import {Helpers} from "@root/globels/helpers";
+import {UploadApiResponse} from "cloudinary";
+import {uploads} from "@root/globels/cloudinary-upload";
 
 export class Signup {
     //Joi validation is to ensure that data conforms to a specific structure and set of rules before
@@ -31,7 +33,7 @@ export class Signup {
                 password,
                 avatarColor
          });
-
+    const result: UploadApiResponse = await uploads(avatarImage, `${userObjectId}`,true,true) as UploadApiResponse;
 
     }
 
