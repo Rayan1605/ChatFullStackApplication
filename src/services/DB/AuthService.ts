@@ -1,5 +1,6 @@
 import {IAuthDocument} from "@root/features/auth/interfaces/auth.interface";
 import {Helpers} from "@root/globels/helpers";
+import {AuthModel} from "@root/features/auth/models/auth.schema";
 
 class AuthService {
 
@@ -13,7 +14,9 @@ class AuthService {
             {email: Helpers.lowerEmail(email)}
         ]
     }
-
-
+    const user: IAuthDocument = await AuthModel.findOne(query).exec() as IAuthDocument;
+    return user;
     }
+
 }
+export const authService: AuthService = new AuthService();
