@@ -3,7 +3,7 @@ import { model, Model, Schema} from "mongoose";
 import { hash, compare} from "bcrypt";
 
 const SALT_ROUND = 10;
-
+//what data is inside our database
     const authSchema: Schema = new Schema({
 
         username: { type: String},
