@@ -41,6 +41,7 @@ import { ObjectId} from "mongodb";
      comparePassword(password: string): Promise<boolean>;
      hashPassword(password: string): Promise<string>;
  }
+ // This is  the data required from users when they register below.
 
  export interface ISignUpData {
      _id: ObjectId;
@@ -50,6 +51,8 @@ import { ObjectId} from "mongodb";
      password: string;
      avatarColor: string;
  }
+
+ // This is the data required from users when they log in below which is simply the IAuthDocument or a string
 
     export interface ILoginData {
      value?: string | IAuthDocument;

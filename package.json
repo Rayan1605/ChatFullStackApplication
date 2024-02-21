@@ -26,6 +26,8 @@
     "hpp": "^0.2.3",
     "http-status-codes": "^2.3.0",
     "joi": "^17.12.1",
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
     "mongoose": "^8.1.1",
     "nodeman": "^1.1.2",
     "nodemon": "^3.0.3",
@@ -43,6 +45,8 @@
     "@types/cors": "^2.8.16",
     "@types/express": "^4.17.21",
     "@types/hpp": "^0.2.5",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/lodash": "^4.14.202",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0"
   }
