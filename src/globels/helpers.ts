@@ -13,4 +13,17 @@ export class Helpers {
 
         return email.toLowerCase();
 }
+
+static generateRandomColor = (integerLength: number): number => {
+        const character = '0123456789';
+        let result = ' ';
+        const charactersLength = character.length;
+        for (let i = 0; i < integerLength; i++){
+            result += character.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        return parseInt(result);
+
+
+}
+
 }
