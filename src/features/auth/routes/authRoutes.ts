@@ -10,8 +10,10 @@ class AuthRoutes {
 
     public routes(): Router {
         this.router.post('/signup',Signup.prototype.signup);
-        this.router.post('/signup', Signup.prototype.signup);
+
+        return this.router;
 
     }
-
 }
+
+export const authRoutes: AuthRoutes = new AuthRoutes();
