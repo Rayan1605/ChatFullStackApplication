@@ -6,6 +6,11 @@ class AuthRoutes {
 
     constructor() {
     this.router = express.Router();
+    }
+
+    public routes(): Router {
+        this.router.post('/signup',Signup.prototype.signup);
+        this.router.post('/signup', Signup.prototype.signup);
 
     }
 
