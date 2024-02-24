@@ -40,7 +40,7 @@ export class Signup {
          throw new BadRequestError("Error occurred: File upload failed. Try again");
      }
 
-     res.status(HTTP_STATUS.CREATED).json({message: "User created successfully"});
+     res.status(HTTP_STATUS.CREATED).json({message: "User created successfully", authData});
 
     }
 
