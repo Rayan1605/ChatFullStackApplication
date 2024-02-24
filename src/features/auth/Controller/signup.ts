@@ -8,6 +8,7 @@ import {BadRequestError} from "@root/globels/error-handler";
 import {Helpers} from "@root/globels/helpers";
 import {UploadApiResponse} from "cloudinary";
 import {uploads} from "@root/globels/cloudinary-upload";
+import HTTP_STATUS from "http-status-codes";
 
 export class Signup {
     //Joi validation is to ensure that data conforms to a specific structure and set of rules before
@@ -38,6 +39,8 @@ export class Signup {
      if (!result?.public_id) {
          throw new BadRequestError("Error occurred: File upload failed. Try again");
      }
+
+     res.status(HTTP_STATUS.CREATED).json({message: "User created successfully"});
 
     }
 
