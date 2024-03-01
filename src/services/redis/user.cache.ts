@@ -74,7 +74,9 @@ export class UserCache extends BaseCache {
     // Time to create the actual method that will save the data to Redis
 
         try {
-            if ()
+            if (!this.client.isOpen) {
+                await this.client.connect();
+            }
         } catch (error) {
             throw new ServerError('Failed to save user to cache');
         }
