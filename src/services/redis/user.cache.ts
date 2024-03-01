@@ -39,5 +39,15 @@ export class UserCache extends BaseCache {
         social
     } = createdUser;
 
+    const firstList: string [] = [
+
+            '_id', `${_id}`,
+            'uId', `${uId}`,
+            'username', `${username}`,
+            'email', `${email}`,
+            'avatarColor', `${avatarColor}`,
+            'createdAt', `${createdAt}`,
+            'postsCount', `${postsCount}`
+    ];
     }
 }
