@@ -9,6 +9,10 @@ import {Helpers} from "@root/globels/helpers";
 import {UploadApiResponse} from "cloudinary";
 import {uploads} from "@root/globels/cloudinary-upload";
 import HTTP_STATUS from "http-status-codes";
+import {UserCache} from "@services/redis/user.cache";
+import {IUserDocument} from "@root/features/user/models/user.interface";
+
+const userCache: UserCache = new UserCache();
 
 export class Signup {
     //Joi validation is to ensure that data conforms to a specific structure and set of rules before
@@ -39,6 +43,10 @@ export class Signup {
      if (!result?.public_id) {
          throw new BadRequestError("Error occurred: File upload failed. Try again");
      }
+     // Add to redis cache
+   const userDataForCache: IUserDocument = Signup.prototype.userData(authData, userObjectId);
+   userDataForCache.profilePicture = `https://res/cloudinary.com/${process.env.CLOUD_NAME}/image/upload/v${result.version}/${result.public_id}`;
+   await userCache.saveUserToCache(`${userObjectId}`, uid, userDataForCache);
 
      res.status(HTTP_STATUS.CREATED).json({message: "User created successfully", authData});
 
@@ -55,6 +63,42 @@ export class Signup {
             avatarColor,
             createdAt: new Date()
         } as unknown as IAuthDocument;
-
     }
+    private userData(data: IAuthDocument, userObjectId: ObjectId): IUserDocument {
+        const { _id, username, email, uId, password, avatarColor } = data;
+        return {
+            _id: userObjectId,
+            authId: _id,
+            uId,
+            username: Helpers.firstletter(username),
+            email,
+            password,
+            avatarColor,
+            profilePicture: '',
+            blocked: [],
+            blockedBy: [],
+            work: '',
+            location: '',
+            school: '',
+            quote: '',
+            bgImageVersion: '',
+            bgImageId: '',
+            followersCount: 0,
+            followingCount: 0,
+            postsCount: 0,
+            notifications: {
+                messages: true,
+                reactions: true,
+                comments: true,
+                follows: true
+            },
+            social: {
+                facebook: '',
+                instagram: '',
+                twitter: '',
+                youtube: ''
+            }
+        } as unknown as IUserDocument;
+    }
+
 }
