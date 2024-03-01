@@ -89,6 +89,7 @@ export class UserCache extends BaseCache {
             // Using HSET, you can add or update information in the user's profile.
             // You tell Redis the name of the profile, the detail you're adding or updating (like "email"),
             // and the detail's value (like "user@example.com").
+
             await this.client.ZADD('user', { score: parseInt(userId, 10), value: `${key}`})
             await this.client.HSET(`${key}`, dataToSave);
         } catch (error) {
