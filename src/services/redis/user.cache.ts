@@ -67,5 +67,7 @@ export class UserCache extends BaseCache {
             'bgImageVersion', `${bgImageVersion}`
         ];
     const dataToSave: string [] = [...firstList, ...secondList, ...thirdList];
+    // Time to create the actual method that will save the data to Redis
+
     }
 }
