@@ -9,6 +9,9 @@ import {Helpers} from "@root/globels/helpers";
 import {UploadApiResponse} from "cloudinary";
 import {uploads} from "@root/globels/cloudinary-upload";
 import HTTP_STATUS from "http-status-codes";
+import {UserCache} from "@services/redis/user.cache";
+
+const userCache: UserCache = new UserCache();
 
 export class Signup {
     //Joi validation is to ensure that data conforms to a specific structure and set of rules before
@@ -40,6 +43,7 @@ export class Signup {
          throw new BadRequestError("Error occurred: File upload failed. Try again");
      }
      // Add to redis cache
+
 
      res.status(HTTP_STATUS.CREATED).json({message: "User created successfully", authData});
 
