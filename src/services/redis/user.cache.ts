@@ -58,6 +58,13 @@ export class UserCache extends BaseCache {
             'notifications', JSON.stringify(notifications),
             'social', JSON.stringify(social),
       ]
-        const
+        const thirdList: string [] = [
+            'work', `${work}`,
+            'location', `${location}`,
+            'school', `${school}`,
+            'quote', `${quote}`,
+            'bgImageId', `${bgImageId}`,
+            'bgImageVersion', `${bgImageVersion}`
+            ]
     }
 }
