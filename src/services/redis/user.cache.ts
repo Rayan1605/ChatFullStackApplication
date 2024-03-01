@@ -69,5 +69,6 @@ export class UserCache extends BaseCache {
     const dataToSave: string [] = [...firstList, ...secondList, ...thirdList];
     // Time to create the actual method that will save the data to Redis
 
+
     }
 }
