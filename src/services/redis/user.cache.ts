@@ -92,6 +92,8 @@ export class UserCache extends BaseCache {
 
             // below It organizes users based on their IDs
             await this.client.ZADD('user', { score: parseInt(userId, 10), value: `${key}`})
+            //This line stores or updates the user's detailed information in a Redis hash,
+            // using the user's key to uniquely identify their data.
             await this.client.HSET(`${key}`, dataToSave);
         } catch (error) {
             throw new ServerError('Failed to save user to cache');
