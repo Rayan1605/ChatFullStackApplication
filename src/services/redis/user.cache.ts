@@ -91,6 +91,7 @@ export class UserCache extends BaseCache {
             // and the detail's value (like "user@example.com").
 
             // below It organizes users based on their IDs
+            //Base 10 is the decimal system, which is the most common way to represent numbers in everyday life.
             await this.client.ZADD('user', { score: parseInt(userId, 10), value: `${key}`})
             //This line stores or updates the user's detailed information in a Redis hash,
             // using the user's key to uniquely identify their data.
