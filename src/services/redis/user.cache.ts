@@ -49,5 +49,15 @@ export class UserCache extends BaseCache {
             'createdAt', `${createdAt}`,
             'postsCount', `${postsCount}`
     ];
+    const secondList: string [] = [
+            'blocked', JSON.stringify(blocked),
+            'blockedBy', JSON.stringify(blockedBy),
+            'profilePicture', `${profilePicture}`,
+            'followersCount', `${followersCount}`,
+            'followingCount', `${followingCount}`,
+            'notifications', JSON.stringify(notifications),
+            'social', JSON.stringify(social),
+      ]
+        const
     }
 }
