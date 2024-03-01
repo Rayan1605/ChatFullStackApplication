@@ -9,7 +9,11 @@
 // You can save the data in lists, that is in arrays, you can save data sets or in objects, we're going to use sets
 import {BaseCache} from "@services/redis/base.cache";
 import {IUserDocument} from "@root/features/user/models/user.interface";
+import Logger from "bunyan";
+import {ServerError} from "src/globels/error-handler";
+import {config} from "@root/config";
 
+const log: Logger = config.createLogger('redisConnection');
 export class UserCache extends BaseCache {
     constructor() {
         super('userCache');
@@ -69,6 +73,10 @@ export class UserCache extends BaseCache {
     const dataToSave: string [] = [...firstList, ...secondList, ...thirdList];
     // Time to create the actual method that will save the data to Redis
 
-
+        try {
+            if ()
+        } catch (error) {
+            throw new ServerError('Failed to save user to cache');
+        }
     }
 }
