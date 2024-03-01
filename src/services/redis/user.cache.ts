@@ -7,7 +7,7 @@
 // we want to be retrieved quickly
 import {BaseCache} from "@services/redis/base.cache";
 
-export class userCache extends BaseCache {
+export class UserCache extends BaseCache {
     constructor() {
         super('userCache');
     }
