@@ -65,6 +65,7 @@ export class UserCache extends BaseCache {
             'quote', `${quote}`,
             'bgImageId', `${bgImageId}`,
             'bgImageVersion', `${bgImageVersion}`
-            ]
+        ];
+    const dataToSave: string [] = [...firstList, ...secondList, ...thirdList];
     }
 }
