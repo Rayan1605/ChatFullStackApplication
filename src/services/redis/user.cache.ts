@@ -78,6 +78,8 @@ export class UserCache extends BaseCache {
             if (!this.client.isOpen) {
                 await this.client.connect();
             }
+            //Saving the data to Redis
+            await this.client.ZADD('user', { score: parseInt(userId, 10), value: `${key}`})
         } catch (error) {
             throw new ServerError('Failed to save user to cache');
         }
