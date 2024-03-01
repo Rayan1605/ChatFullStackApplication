@@ -73,7 +73,7 @@ export class UserCache extends BaseCache {
     const dataToSave: string [] = [...firstList, ...secondList, ...thirdList];
     // Time to create the actual method that will save the data to Redis
 
-        //Checking if there is an op
+        //Checking if there is an open connection to Redis
         try {
             if (!this.client.isOpen) {
                 await this.client.connect();
