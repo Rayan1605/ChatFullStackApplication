@@ -44,7 +44,7 @@ export class Signup {
          throw new BadRequestError("Error occurred: File upload failed. Try again");
      }
      // Add to redis cache
-   const userDataForCache: IUserDocument = Signup.prototype.signupData(authData, userObjectId);
+   const userDataForCache: IUserDocument = Signup.prototype.userData(authData, userObjectId);
 
 
      res.status(HTTP_STATUS.CREATED).json({message: "User created successfully", authData});
