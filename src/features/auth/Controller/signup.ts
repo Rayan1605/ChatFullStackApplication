@@ -10,6 +10,7 @@ import {UploadApiResponse} from "cloudinary";
 import {uploads} from "@root/globels/cloudinary-upload";
 import HTTP_STATUS from "http-status-codes";
 import {UserCache} from "@services/redis/user.cache";
+import {IUserDocument} from "@root/features/user/models/user.interface";
 
 const userCache: UserCache = new UserCache();
 
@@ -43,6 +44,7 @@ export class Signup {
          throw new BadRequestError("Error occurred: File upload failed. Try again");
      }
      // Add to redis cache
+   const userDataForCache: IUserDocument = Signup.prototype.signupData(authData, userObjectId);
 
 
      res.status(HTTP_STATUS.CREATED).json({message: "User created successfully", authData});
@@ -60,6 +62,6 @@ export class Signup {
             avatarColor,
             createdAt: new Date()
         } as unknown as IAuthDocument;
-
     }
+
 }
