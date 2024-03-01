@@ -80,6 +80,15 @@ export class UserCache extends BaseCache {
             }
             //Saving the data to Redis
             //ZADD is a command used in Redis to add elements to a sorted set
+            //HSET is used in Redis to store data in a hash.
+            // A hash in Redis is like a small database or a container
+            // where you can store multiple pieces of information related to the same thing
+
+            //Imagine you have a profile for a user in an app, and you want to keep various details
+            // about them like their email, name, and age.
+            // Using HSET, you can add or update information in the user's profile.
+            // You tell Redis the name of the profile, the detail you're adding or updating (like "email"),
+            // and the detail's value (like "user@example.com").
             await this.client.ZADD('user', { score: parseInt(userId, 10), value: `${key}`})
             await this.client.HSET(`${key}`, dataToSave);
         } catch (error) {
