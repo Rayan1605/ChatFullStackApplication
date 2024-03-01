@@ -39,6 +39,7 @@ export class Signup {
      if (!result?.public_id) {
          throw new BadRequestError("Error occurred: File upload failed. Try again");
      }
+     // Add to redis cache
 
      res.status(HTTP_STATUS.CREATED).json({message: "User created successfully", authData});
 
