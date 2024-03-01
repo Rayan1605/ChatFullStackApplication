@@ -79,6 +79,7 @@ export class UserCache extends BaseCache {
                 await this.client.connect();
             }
             //Saving the data to Redis
+            //ZADD is a command used in Redis to add elements to a sorted set
             await this.client.ZADD('user', { score: parseInt(userId, 10), value: `${key}`})
             await this.client.HSET(`${key}`, dataToSave);
         } catch (error) {
