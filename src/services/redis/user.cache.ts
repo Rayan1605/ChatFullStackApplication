@@ -80,7 +80,7 @@ export class UserCache extends BaseCache {
             }
             //Saving the data to Redis
             await this.client.ZADD('user', { score: parseInt(userId, 10), value: `${key}`})
-            await this.client.HMSET(`${key}`, dataToSave);
+            await this.client.HSET(`${key}`, dataToSave);
         } catch (error) {
             throw new ServerError('Failed to save user to cache');
         }
