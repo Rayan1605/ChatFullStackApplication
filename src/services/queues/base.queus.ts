@@ -20,8 +20,24 @@ export abstract class BaseQueue {
         serverAdapter = new ExpressAdapter();
         serverAdapter.setBasePath('/queues');
 
-    }
 
+        createBullBoard({
+            queues: bullAdapters,
+            serverAdapter
+        });
+        this.log = config.createLogger(`${QueueName}Queue`);
+
+        this.queue.on('global:completed', (jobId: string) => {
+            this.log.info(`Job with ID ${jobId} has been completed`);
+        })
+        this.queue.on('Completed', (job: Job) => {
+            job.remove();
+        })
+        this.queue.on('global:stalled', (jobId: string) => {
+            this.log.error(`Job with ID ${jobId} has been stalled`);
+        })
+
+    }
 }
 
 
