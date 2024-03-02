@@ -43,6 +43,8 @@ export class Signup {
      if (!result?.public_id) {
          throw new BadRequestError("Error occurred: File upload failed. Try again");
      }
+
+
      // Add to redis cache
    const userDataForCache: IUserDocument = Signup.prototype.userData(authData, userObjectId);
    userDataForCache.profilePicture = `https://res/cloudinary.com/${process.env.CLOUD_NAME}/image/upload/v${result.version}/${result.public_id}`;
