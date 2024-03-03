@@ -1,3 +1,11 @@
+//Bull: This is a tool used for managing the queue, making sure tasks are added, processed,
+// and completed correctly.
+// Logger: This is used to keep a record of what happens in the queue, like when a task is done or
+// if there's a problem.
+// Bull Board: This is like a dashboard that shows what's happening in the queue,
+// so you can see the status of tasks easily.
+// Config: This is the settings for how the queue should work.
+
 import Queue, { Job} from "bull";
 import Logger from "bunyan";
 import { createBullBoard} from '@bull-board/api';
