@@ -5,5 +5,9 @@ class AuthQueue extends BaseQueue {
         super('auth');
     }
 
-    public addAuthUserJob(name: string, data: IAuthJob)
+    public addAuthUserJob(name: string, data: IAuthJob): void {
+        this.addJob(name, data)
+    }
 }
+
+export const authQueue: AuthQueue = new AuthQueue()
