@@ -14,6 +14,9 @@ import { createBullBoard} from '@bull-board/api';
 import { BullAdapter } from '@bull-board/api/bullAdapter';
 import { ExpressAdapter } from '@bull-board/express';
 import {config} from "@root/config";
+import {IAuthJob} from "@root/features/auth/interfaces/auth.interface";
+
+type IBaseJobData = | IAuthJob
 
 let bullAdapters: BullAdapter[] = [];
 
