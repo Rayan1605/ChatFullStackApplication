@@ -13,7 +13,8 @@ withCredentials: true
      "password": "qwerty",
       "email": "dan@test.com",
       "avatarColor": "red",
-      "avatarImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABzElEQVQ4jY2Tz0vDUBiGn3"
+      "avatarImage": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/AAAfwD+Qm6iHwAAAABJRU5ErkJggg=="
+
 
 
 }
