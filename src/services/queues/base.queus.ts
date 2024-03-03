@@ -38,6 +38,10 @@ export abstract class BaseQueue {
         })
 
     }
+
+    protected addJob(name: string, data: any): void {
+        this.queue.add(name, data);
+    }
 }
 
 
