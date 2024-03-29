@@ -6,9 +6,11 @@
 // so you can see the status of tasks easily.
 // Config: This is the settings for how the queue should work.
 
-//a queue is a list where things are added at one end and removed from the other end. Just like in the grocery store line:
+//a queue is a list where things are added at one end and removed from the other end.
+// Just like in the grocery store line:
 
-//to saving to MongoDB, we need to add it to a queue and then from the Queue it will be gotten by a worker and send it to mongocb
+//to saving to MongoDB, we need to add it to a queue and then from the Queue
+// it will be gotten by a worker and send it to mongocb
 import Queue, { Job} from "bull";
 import Logger from "bunyan";
 import { createBullBoard} from '@bull-board/api';
