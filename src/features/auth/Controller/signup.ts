@@ -53,7 +53,11 @@ export class Signup {
    await userCache.saveUserToCache(`${userObjectId}`, uid, userDataForCache);
 
    //Add to Database
+        // We don't want to save the password in the database so we omit it
    omit(userDataForCache, ['_Id', 'username', 'email','avatarColor', 'password']);
+   //This line adds a job to authQueue to insert a user into a database, specified by 'addAuthuserToDb'.
+        // It passes userDataForCache, which excludes sensitive fields, as data for the job.
+        // Job queues enable asynchronous processing for efficient task handling, such as database operations.
    authQueue.addAuthUserJob('addAuthuserToDb', { value: userDataForCache})
      res.status(HTTP_STATUS.CREATED).json({message: "User created successfully", authData});
 
