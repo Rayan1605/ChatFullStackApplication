@@ -4,11 +4,15 @@
 import { BaseQueue} from "@services/queues/base.queus";
 import {IAuthJob} from "src/features/auth/interfaces/auth.interface"
 class AuthQueue extends BaseQueue {
+    //  so auth is the name which is used to identify and manage a specific set of task within Redis
+    // Then we add it to the Bull Adapter which is used to manage the queue and we can use it to create a dashboard
+
     constructor() {
         super('auth');
     }
 
 
+    // Using the add method in base.queue.ts to add a job to the queue
     public addAuthUserJob(name: string, data: IAuthJob): void {
         this.addJob(name, data)
     }
