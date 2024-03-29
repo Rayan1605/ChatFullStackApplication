@@ -14,6 +14,7 @@ import {IUserDocument} from "@root/features/user/models/user.interface";
 //Delete properties from an object
 import { omit} from 'lodash'
 import {authQueue} from "@services/queues/auth.queue";
+import {userQueue} from "@services/queues/user.queue";
 const userCache: UserCache = new UserCache();
 
 export class Signup {
@@ -53,9 +54,15 @@ export class Signup {
    await userCache.saveUserToCache(`${userObjectId}`, uid, userDataForCache);
 
    //Add to Database
+        // We don't want to save the password in the database so we omit it
    omit(userDataForCache, ['_Id', 'username', 'email','avatarColor', 'password']);
+   //This line adds a job to authQueue to insert a user into a database, specified by 'addAuthuserToDb'.
+        // It passes userDataForCache, which excludes sensitive fields, as data for the job.
+        // Job queues enable asynchronous processing for efficient task handling, such as database operations.
    authQueue.addAuthUserJob('addAuthuserToDb', { value: userDataForCache})
-     res.status(HTTP_STATUS.CREATED).json({message: "User created successfully", authData});
+        userQueue.addUserJob('addUserJob', { value: userDataForCache})
+
+        res.status(HTTP_STATUS.CREATED).json({message: "User created successfully", authData});
 
     }
 
