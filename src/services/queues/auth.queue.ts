@@ -1,6 +1,7 @@
 // This focuses on the queue for the authentication service.
 // It is used to add jobs to the queue for the worker to process. It inherits from the BaseQueue class.
 
+
 import { BaseQueue} from "@services/queues/base.queus";
 import {IAuthJob} from "src/features/auth/interfaces/auth.interface"
 import {authWorker} from "@worker/auth.worker";
