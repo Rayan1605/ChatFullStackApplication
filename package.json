@@ -4,7 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon -r tsconfig-paths/register src/app.ts | ./node_modules/.bin/bunyan"
+    "dev": "nodemon -r tsconfig-paths/register src/app.ts | bunyan",
+    "test": "jest"
+
   },
   "keywords": [],
   "author": "",
@@ -49,8 +51,11 @@
     "@types/cors": "^2.8.16",
     "@types/express": "^4.17.21",
     "@types/hpp": "^0.2.5",
+    "@types/jest": "^29.2.5",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/lodash": "^4.14.202",
+    "jest": "^29.2.5",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0"
   }

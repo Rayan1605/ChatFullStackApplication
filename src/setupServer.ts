@@ -35,9 +35,7 @@ import {createClient} from "redis";
 import ApplicationRoutes from "@root/routes";
 import {createAdapter} from "@socket.io/redis-adapter";
 import {config} from "@root/config";
-import {CustomError, IErrorResponse} from "@root/globels/error-handler";
-
-
+import {CustomError, IErrorResponse} from "@root/shared/globels/helpers/error-handler";
 
 
 const SERVER_PORT = 5000; // port for HTTP server
