@@ -23,10 +23,12 @@ describe('Get', () => {
     it('should send correct json response if posts exist in cache', async () => {
       const req: Request = postMockRequest(newPost, authUserPayload, { page: '1' }) as Request;
       const res: Response = postMockResponse();
+      // Changing the function to return fakeMockData so pretending that it exist in the cache
       jest.spyOn(PostCache.prototype, 'getPostsFromCache').mockResolvedValue([postMockData]);
       jest.spyOn(PostCache.prototype, 'getTotalPostsInCache').mockResolvedValue(1);
 
       await Get.prototype.posts(req, res);
+      //
       expect(PostCache.prototype.getPostsFromCache).toHaveBeenCalledWith('post', 0, 10);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({
