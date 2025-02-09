@@ -44,7 +44,12 @@ export interface ISavePostToCache {
   createdPost: IPostDocument;
 }
 
-
+export interface IPostJobData {
+  key?: string;
+  value?: IPostDocument;
+  keyOne?: string;
+  keyTwo?: string;
+}
 
 export interface IQueryComplete {
   ok?: number;
